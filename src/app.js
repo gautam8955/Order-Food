@@ -17,7 +17,7 @@ const home = require('./routes/home');
 // 'mongodb://localhost/Online_Food_Order'
 
 // console.log(process.env.MONGODB_URL);
-mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/Online_Food_Order', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
