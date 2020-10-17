@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cart</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0ece7;
+  }
+  
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .topnav-right {
+    float: right;
+  }
+		
+
+
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			max-width: 300px;width: 300px;
+			margin: auto;
+			text-align: center;
+			font-family: arial;
+			height: 330px;
+            background-color: rgb(247, 242, 229);
+            padding-top: 5px;
+            margin-top: 20px;
+
+		}
+
+		.button{
+			display:inline-block;
+			 padding: 0.3em 1.2em;
+			 margin: 0 0.3em 0.3em 0;
+			 border-radius: 2em;
+			 box-sizing: border-box;
+			 text-decoration: none;
+			 font-family: 'Roboto',sans-serif;
+			 font-weight: 300;
+			 color:#FFFFFF;
+			 background-color:#4eb5f1;
+			 text-align:center;
+			 transition: all 0.2s;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="topnav">
+        <a class="active" href="/">HOME</a>
+        <a href="/">MENU</a>
+        <!-- <a href="#contact">Contact</a> -->
+        <div class="topnav-right">
+          <a href="/customerProfile">PROFILE</a>
+          <a href="/signUp">LoGIN/SIGNUP</a>
+        </div>
+      </div>  
+	<div >
+	<div >
+		<div class="card">
+                        <h1><%= food.title %></h1>
+                        <p class="price">Price: <%= food.price %></p>
+                        <p class="price"><%= food.description %></p>
+                        <p class="price">Restaurant: <%= food.restaurant %></p><br>
+                        <a class="button" href="/getFoodDetail/placeOrder/<%= food._id %>" class="btn">Order Now</a>
+
+
+		</div>
+		
+			
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ADD PRODUCT</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form1" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/add-product',
+					data: $('#form1').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form1')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					//ADD THIS CODE
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="You are regestered,You can login now.") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+		});
+	</script>
+
+	<style>
+
+body{
+			background-color: #f0ece7;
+		}
+.button{
+			display:inline-block;
+			 padding: 0.3em 1.2em;
+			 margin: 0 0.3em 0.3em 0;
+			 border-radius: 2em;
+			 box-sizing: border-box;
+			 text-decoration: none;
+			 font-family: 'Roboto',sans-serif;
+			 font-weight: 300;
+			 color:#FFFFFF;
+			 background-color:#4eb5f1;
+			 transition: all 0.2s;
+		}
+		.topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .topnav-right {
+    float: right;
+  }
+
+	</style>
+</head>
+<body>
+	<div class="topnav">
+		<a class="active" href="/viewOrder">Home</a>
+		<a href="/add-product">ADD PRODUCT</a>
+		<a href="/viewOrder">VIEW ORDERS</a>
+		<div class="topnav-right">
+		  <a href="/profile">PROFILE</a>
+		  <a href="/signUp">LOGIN/SIGN UP</a>
+		</div>
+	  </div> 
+	
+	
+	<div class="col-md-4 col-md-offset-4">
+
+		<div>
+			<p>ADD PRODUCT
+			</p>
+		</div>
+		<div class="form-group">
+			<form id="form1" method="post">
+				<input type="text" name="title" placeholder="title" required="" class="form-control"><br/>
+				<input type="number" name="price" placeholder="price" required="" class="form-control"><br/>
+                <input type="text" name="description" placeholder="VEG/NON-VEG" required="" class="form-control"><br/>
+                <input type="text" name="restaurant" placeholder="Restaurant Name" required="" class="form-control"><br/>
+				<input type="submit" value="ADD PRODUCT" class="btn btn-success">
+			</form>
+		</div>
+		
+</body>
+</html>

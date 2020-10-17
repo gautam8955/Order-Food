@@ -1,0 +1,5 @@
+node_modules
+
+
+
+# set MONGODB_URL="mongodb+srv://Online-Food-Order:gautam7118@cluster0.lxd5m.mongodb.net/Online_Food_Order?retryWrites=true&w=majority"
