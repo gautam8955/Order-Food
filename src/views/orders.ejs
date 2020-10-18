@@ -86,7 +86,7 @@
 			<% for (let food of foods) { %>
 				<div class="card">
 						<h1>Order ID: <%= food.id %></h1>
-						<h1>User ID: <%= food.sessionID %></h1>
+						<h1>Customer ID: <%= food.sessionID %></h1>
 					<a class="button" href="/restaurant/getFoodDetail/<%= food.id%>/<%= food.sessionID%>" class="btn">View Order</a>
 					
 				</div>
