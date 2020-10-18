@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Customer = require('../models/customer');
 const addProduct = require('../models/addProduct');
+
+//Home Page
 router.get('/', (req, res, next) => {
 	
 	addProduct.find( function(err, result) {
@@ -11,6 +13,7 @@ router.get('/', (req, res, next) => {
 		res.render('food.ejs', {"foods": result});
 })
 })
+
 //Login Profile
 router.get('/', function (req, res, next) {
 	Customer.findOne({unique_id:req.session.userId},function(err,data){
@@ -29,6 +32,8 @@ router.get('/', function (req, res, next) {
 	});
 });
 
+
+//Sign Up page
 router.get('/signUp', function (req, res, next) {
 	return res.render('signUp.ejs');
 });

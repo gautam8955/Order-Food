@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const { sendWelcomeEmailCustomer } = require('../emails/account')
 const Customer = require('../models/customer');
 const addProduct = require('../models/addProduct');
 const Order = require('../models/placeOrder');
@@ -10,9 +11,9 @@ router.get('/customer', function (req, res, next) {
 	return res.render('customerRegister.ejs');
 });
 
-//Registration
+//Customer Registration
 router.post('/customer', function(req, res, next) {
-	console.log(req.body);
+	//console.log(req.body);
 	var customerInfo = req.body;
 
 
@@ -27,7 +28,7 @@ router.post('/customer', function(req, res, next) {
 					Customer.findOne({},function(err,data){
 
 						if (data) {
-							console.log("if");
+							//console.log("if");
 							c = data.unique_id + 1;
 						}else{
 							c=1;
@@ -52,6 +53,7 @@ router.post('/customer', function(req, res, next) {
 						});
 
 					}).sort({_id: -1}).limit(1);
+					sendWelcomeEmailCustomer(customerInfo.email, customerInfo.name)
 					res.send({"Success":"You are regestered,You can login now."});
 				}else{
 					res.send({"Success":"Email is already used."});
@@ -64,11 +66,12 @@ router.post('/customer', function(req, res, next) {
 	}
 });
 
+//Customer Login
 router.get('/customer/login', function (req, res, next) {
 	return res.render('customerLogin.ejs');
 });
 
-//Login
+//Customer Login
 router.post('/customer/login', function (req, res, next) {
 	//console.log(req.body);
 	Customer.findOne({email:req.body.email}, async (err,data) => {
@@ -92,7 +95,7 @@ router.post('/customer/login', function (req, res, next) {
 });
 
 
-//profile.
+//Customer profile.
 router.get('/customerProfile', function (req, res, next) {
 	Customer.findOne({unique_id:req.session.userId},function(err,data){
 		
@@ -105,7 +108,7 @@ router.get('/customerProfile', function (req, res, next) {
 	});
 });
 
-//Logout
+//Customer Logout
 router.get('/logout', function (req, res, next) {
 	if (req.session) {
     // delete session object
@@ -119,12 +122,12 @@ router.get('/logout', function (req, res, next) {
 }
 });
 
-
+//Customer Forget Password
 router.get('/forgetpass', function (req, res, next) {
 	res.render("forget.ejs");
 });
 
-//Forget Password
+//Customer Forget Password
 router.post('/forgetpass', function (req, res, next) {
 	Customer.findOne({email:req.body.email},function(err,data){
 		if(!data){
@@ -150,7 +153,7 @@ router.post('/forgetpass', function (req, res, next) {
 	
 });
 
-//To get Content of food item
+//To get Menu of food item
  router.get('/getFoodDetail/:id',  (req, res, next) => {
 	const prodId = req.params.id;
 	const session = req.session.userId
@@ -173,7 +176,7 @@ router.post('/forgetpass', function (req, res, next) {
 
 })
 
-
+//For storing placed order details in database.
 	router.get('/getFoodDetail/placeOrder/:id', async (req, res, next) => {
 		const result = req.params.id;
 		const session = req.session.userId

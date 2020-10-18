@@ -1,3 +1,5 @@
+//Restaurant REgistration and login Model
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 

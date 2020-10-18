@@ -1,3 +1,5 @@
+//Model For adding food products by restaurant and Customer uses this model for fetching details of menu.
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

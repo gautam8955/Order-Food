@@ -1,3 +1,5 @@
+//Controller file of Project
+
 var express = require('express');
 var ejs = require('ejs');
 
@@ -11,12 +13,8 @@ const restaurantRoute = require('./routes/restaurant');
 const customerRoute = require('./routes/customer');
 const home = require('./routes/home');
 
-
-// const port = process.env.PORT || 3000
-
 // 'mongodb://localhost/Online_Food_Order'
 
-// console.log(process.env.MONGODB_URL);
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/Online_Food_Order', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
@@ -44,8 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(__dirname + '/views'));
 
-// var home = require('./routes/home');
-// app.use('/', home);
 
  app.use(restaurantRoute);
  app.use(customerRoute);

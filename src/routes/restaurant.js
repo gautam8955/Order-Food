@@ -1,19 +1,20 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const { sendWelcomeEmailRestaurant } = require('../emails/account')
 const Restaurant = require('../models/restaurant');
 const addProduct = require('../models/addProduct');
 const Order = require('../models/placeOrder');
 const Customer = require('../models/customer');
 
-//Home
+//Restaurant Register
 router.get('/restaurant-register', function (req, res, next) {
 	return res.render('restaurantRegister.ejs');
 });
 
-//Registration
+//Restaurant Register
 router.post('/restaurant-register', function(req, res, next) {
-	console.log(req.body);
+	//console.log(req.body);
 	var restaurantInfo = req.body;
 
 
@@ -28,7 +29,7 @@ router.post('/restaurant-register', function(req, res, next) {
 					Restaurant.findOne({},function(err,data){
 
 						if (data) {
-							console.log("if");
+							//console.log("if");
 							c = data.unique_id + 1;
 						}else{
 							c=1;
@@ -52,6 +53,7 @@ router.post('/restaurant-register', function(req, res, next) {
 						});
 
 					}).sort({_id: -1}).limit(1);
+					sendWelcomeEmailRestaurant(restaurantInfo.email, restaurantInfo.name)
 					res.send({"Success":"You are regestered,You can login now."});
 				}else{
 					res.send({"Success":"Email is already used."});
@@ -93,12 +95,12 @@ router.post('/restaurant/login', function (req, res, next) {
 });
 
 
-//forget password
+//Restaurant forget password
 router.get('/forgetpass', function (req, res, next) {
 	res.render("forget.ejs");
 });
 
-//Forget Password
+//Restaurant Forget Password
 router.post('/forgetpass', function (req, res, next) {
 	Restaurant.findOne({email:req.body.email},function(err,data){
 		if(!data){
@@ -128,7 +130,7 @@ router.post('/forgetpass', function (req, res, next) {
 
 
 
-//profile.
+//Restaurant profile.
 router.get('/profile', function (req, res, next) {
 	Restaurant.findOne({unique_id:req.session.userId},function(err,data){
 		
@@ -141,11 +143,12 @@ router.get('/profile', function (req, res, next) {
 	});
 });
 
-
+//Restaurant Add Food Product 
 router.get('/add-product', function (req, res, next) {
 	return res.render('addProduct.ejs');
 });
 
+//Restaurant Add Food Product 
 router.post('/add-product', async (req, res, next) => {
 	const product = new addProduct(req.body);
 	try {
@@ -156,29 +159,27 @@ router.post('/add-product', async (req, res, next) => {
 	}
 });
 
-
+//View list of all placed orders by customers
 router.get('/viewOrder',  (req, res, next) => {
 	Order.find( function(err, result) {
 		if (err) throw err;
-		
+
 		res.render('orders.ejs', {"foods": result});
 })
 
 }) 
 
 
-//have to set multiple parameters in url to fetch user details and fodd details tomorrow.
 
 
+
+//Showing details of placed order with customer details.
 router.get('/restaurant/getFoodDetail/:id/:sessionID',  (req, res, next) => {
 	const prodId = req.params.id;
-	const session = req.params.sessionID
-	console.log(session)
-	console.log(prodId)
+	const session = req.params.sessionID;
 	addProduct.findOne({_id:prodId}, async function(err, result) {
 			if (err) throw err;
 			Customer.findOne({unique_id:session}, async (err, data) => {
-				console.log(data)
 				res.render('orderDetail.ejs', {food:result, customer:data});
 			})
 			
@@ -187,6 +188,8 @@ router.get('/restaurant/getFoodDetail/:id/:sessionID',  (req, res, next) => {
 
 })
 
+//Confirming the placed order or dilevered the placed order.
+
 router.get('/delivered/:id', (req, res, next) => {
 	var orderID = req.params.id
 	Order.deleteOne({id: orderID}, (err, data) => {
@@ -194,7 +197,6 @@ router.get('/delivered/:id', (req, res, next) => {
 			res.json(err)
 		}
 		else{
-			console.log('delivered')
 			res.redirect('/viewOrder')
 		}	
 	})
