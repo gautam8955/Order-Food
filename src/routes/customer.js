@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const { sendWelcomeEmailCustomer } = require('../emails/account')
+const { sendWelcomeEmail } = require('../emails/account')
 const Customer = require('../models/customer');
 const addProduct = require('../models/addProduct');
 const Order = require('../models/placeOrder');
@@ -53,7 +53,7 @@ router.post('/customer', function(req, res, next) {
 						});
 
 					}).sort({_id: -1}).limit(1);
-					sendWelcomeEmailCustomer(customerInfo.email, customerInfo.name)
+					sendWelcomeEmail(customerInfo.email, customerInfo.name)
 					res.send({"Success":"You are regestered,You can login now."});
 				}else{
 					res.send({"Success":"Email is already used."});

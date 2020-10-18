@@ -1,7 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const { sendWelcomeEmailRestaurant } = require('../emails/account')
 const Restaurant = require('../models/restaurant');
 const addProduct = require('../models/addProduct');
 const Order = require('../models/placeOrder');
@@ -53,7 +52,6 @@ router.post('/restaurant-register', function(req, res, next) {
 						});
 
 					}).sort({_id: -1}).limit(1);
-					sendWelcomeEmailRestaurant(restaurantInfo.email, restaurantInfo.name)
 					res.send({"Success":"You are regestered,You can login now."});
 				}else{
 					res.send({"Success":"Email is already used."});

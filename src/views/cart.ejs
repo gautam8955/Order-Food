@@ -69,6 +69,11 @@ body {
 			 transition: all 0.2s;
 		}
 
+    .cart{
+      text-align: center;
+      background-color: #4eb5f1;
+    }
+
 
 	</style>
 </head>
@@ -85,7 +90,10 @@ body {
       </div>  
 	<div >
 	<div >
-		<div class="card">
+  </div >
+    <h1 class="cart">CART</h1>
+  </div>
+    <div class="card">
                         <h1><%= food.title %></h1>
                         <p class="price">Price: <%= food.price %></p>
                         <p class="price"><%= food.description %></p>
