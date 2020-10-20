@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<style>
+
+		body{
+			background-color: #f0ece7;
+		}
+		
+		.header {
+			padding: 1px 3px;
+			background: #555;
+			color: #f1f1f1;
+		}
+
+		.header h2{
+			text-shadow: 2px 2px;
+			font-size: 30px;
+			font-family: sans-serif;
+			color:#f6f9fd;
+			text-align: center;
+		}
+
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			max-width: 300px;width: 300px;
+			margin: auto;
+			text-align: center;
+			font-family: arial;
+			height: 120px;
+			background-color: rgb(247, 242, 229);
+
+		}
+		.card h1{
+			padding-top: 5px;
+			text-shadow: 2px 2px;
+			font-size: 30px;
+			font-family: sans-serif;
+			color:#13021d;
+		}
+
+		.price {
+			color: rgb(21, 4, 37);
+			font-size: 22px;
+		}
+
+		.button {
+			display:inline-block;
+			 padding: 0.3em 1.2em;
+			 margin: 0 0.3em 0.3em 0;
+			 border-radius: 2em;
+			 box-sizing: border-box;
+			 text-decoration: none;
+			 font-family: 'Roboto',sans-serif;
+			 font-weight: 300;
+			 color:#FFFFFF;
+			 background-color:#4eb5f1;
+			 text-align:center;
+			 transition: all 0.2s;
+		}
+
+		.card button:hover {
+			opacity: 0.7;
+		}
+
+
+	
+
+
+
+	</style>
+</head>
+<body>
+	<div class="topnav">
+  <a class="active" href="/">HOME</a>
+  <!-- <a href="">News</a> -->
+  <a href="/signUp">RESTAURANT OWNERS</a>
+  <div class="topnav-right">
+    <a href="/customerProfile">PROFILE</a>
+    <a href="/signUp">LOGIN/SIGNUP</a>
+  </div>
+</div>  
+	
+	
+		<div>
+			<div class="header" id="myHeader">
+				<h2>RESTAURANTS</h2>
+			</div>	
+			
+			<% for (let food of foods) { %>
+				<div class="card">
+						
+					<p class="price">Restaurant: <%= food.name %></p><br>
+					<a class="button" href="/getRestaurants/<%= food.name %>" >MENU</a>
+					
+				</div>
+				<% } %>
+
+			
+
+		</div>
+</body>
+
+
+</html>
+

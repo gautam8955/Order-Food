@@ -151,6 +151,17 @@ router.post('/forgetpass', function (req, res, next) {
 	
 });
 
+
+router.get('/getRestaurants/:restaurant', (req, res, next) => {
+	const restaurants = req.params.restaurant
+	//console.log(restaurants)
+	addProduct.find(({restaurant: restaurants}), function(err, result) {
+		if (err) throw err;
+		//console.log(result)
+		res.render('menu.ejs', { "foods": result});
+})
+})
+
 //To get Menu of food item
  router.get('/getFoodDetail/:id',  (req, res, next) => {
 	const prodId = req.params.id;
