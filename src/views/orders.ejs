@@ -28,7 +28,7 @@
 			margin: auto;
 			text-align: center;
 			font-family: arial;
-			height: 160px;
+			height: 230px;
 			background-color: rgb(247, 242, 229);
 
 		}
@@ -87,6 +87,7 @@
 				<div class="card">
 						<h1>Order ID: <%= food.id %></h1>
 						<h1>Customer ID: <%= food.sessionID %></h1>
+						<h1>Restaurant: <%= food.restaurant %></h1>
 					<a class="button" href="/restaurant/getFoodDetail/<%= food.id%>/<%= food.sessionID%>" class="btn">View Order</a>
 					
 				</div>

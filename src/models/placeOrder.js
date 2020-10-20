@@ -13,6 +13,10 @@ const foodSchema = new Schema({
   sessionID: {
     type: Number,
     required: true
+  },
+  restaurant: {
+    type: String,
+    required: true
   }
 });
 

@@ -98,7 +98,7 @@ body {
                         <p class="price">Price: <%= food.price %></p>
                         <p class="price"><%= food.description %></p>
                         <p class="price">Restaurant: <%= food.restaurant %></p><br>
-                        <a class="button" href="/getFoodDetail/placeOrder/<%= food._id %>" class="btn">Order Now</a>
+                        <a class="button" href="/getFoodDetail/placeOrder/<%= food._id %>/<%= food.restaurant%>" class="btn">Order Now</a>
 
 
 		</div>

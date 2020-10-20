@@ -175,14 +175,17 @@ router.post('/forgetpass', function (req, res, next) {
 })
 
 //For storing placed order details in database.
-	router.get('/getFoodDetail/placeOrder/:id', async (req, res, next) => {
+	router.get('/getFoodDetail/placeOrder/:id/:restaurant', async (req, res, next) => {
 		const result = req.params.id;
 		const session = req.session.userId
-		console.log(result);
-		console.log(session)
+		const restaurant = req.params.restaurant
+		// console.log(result);
+		// console.log(session)
+		// console.log(restaurant)
 		var rs= {
 			id: result,
-			sessionID: session
+			sessionID: session,
+			restaurant: restaurant
 		}
 		const order = new Order(rs);
 		try{
