@@ -159,11 +159,25 @@ router.post('/add-product', async (req, res, next) => {
 
 //View list of all placed orders by customers
 router.get('/viewOrder',  (req, res, next) => {
-	Order.find( function(err, result) {
-		if (err) throw err;
+	const session = req.session.userId
+	//console.log(session)
+	Restaurant.findOne({unique_id: session}, (err, data) => {
+		if(err) throw err;
 
-		res.render('orders.ejs', {"foods": result});
-})
+		//console.log(data.name)
+		const restaurantName = data.name;
+
+
+		Order.find({restaurant: restaurantName}, function(err, result) {
+			if (err) throw err;
+			//console.log(result)
+	
+			res.render('orders.ejs', {"foods": result});
+	})
+	})
+
+
+	
 
 }) 
 
