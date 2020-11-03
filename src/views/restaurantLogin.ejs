@@ -44,6 +44,25 @@
 		body{
 			background-color: #f0ece7;
 		}
+
+		.button {
+			display:inline-block;
+			 padding: 0.3em 1.2em;
+			 margin: 0 0.3em 0.3em 0;
+			 border-radius: 2em;
+			 box-sizing: border-box;
+			 text-decoration: none;
+			 font-family: 'Roboto',sans-serif;
+			 font-weight: 300;
+			 color:#FFFFFF;
+			 background-color:#4eb5f1;
+			 text-align:center;
+			 transition: all 0.2s;
+		}
+
+		.card button:hover {
+			opacity: 0.7;
+		}
 	</style>
 </head>
 <body>
@@ -55,7 +74,8 @@
 			<form id="form" method="post" >
 				<input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br/>
 				<input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
-				<input type="submit" value="Login" class="btn btn-success">
+				<input type="submit" value="Login" class="btn btn-success"><br><br>
+				<p>New Restaurant Owner: <a class="button" href="/restaurant-register">Register</a></p>
 			</form>
 		</div>
 		<div class="mssg bg-danger">
